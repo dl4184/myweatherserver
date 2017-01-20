@@ -14,5 +14,10 @@
   "repository": {
   "type": "git",
   "url": "https://github.com/dl4184/myweatherserver"
-}
+},"dependencies" : {
+    "express" : "3.x",
+	"braintree" : "1.47.0",
+	"hapi": "15.0.3",
+    "inert": "4.0.2"
+  }
 }

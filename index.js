@@ -1,23 +1,44 @@
+'use strict'
 
-var http = require('http');
-var express = require('express');
-var app = express();
-var braintree = require("braintree");
+const Hapi = require('hapi')
+const Inert = require('inert')
 
+const Server = new Hapi.Server()
 
+Server.connection({ port: process.env.PORT || 3000 })
 
+Server.register(Inert, (err) => {
+  if (err) throw err
 
-// Hello World
-app.get('/', function (req, res) {
-  res.send('Hello World!')
+  Server.route({
+    method: 'GET',
+    path: '/',
+    handler: function (request, reply) {
+      reply.send('Hello World!')
+    }
+  })
 })
+
+Server.start((err) => {
+  if (err) throw err
+  console.log(`Server running at: ${Server.info.uri}`)
+})
+
+
+
+///var braintree = require("braintree");
+
+
+
+
+
 
 
 
 
 
 //configurations
-var gateway = braintree.connect({
+/*var gateway = braintree.connect({
   environment: braintree.Environment.Sandbox,
   merchantId: "ysrjqnrbr479fcn2",
   publicKey: "2w9wgg6b358yx3vg",
@@ -35,8 +56,4 @@ app.get("/client_token", function (req, res) {
 app.post("/checkout", function (req, res) {
   var nonceFromTheClient = req.body.payment_method_nonce;
   // Use payment method nonce here
-});
-
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+});*/
