@@ -16,8 +16,6 @@ app.get('/', function (req, res) {
 
 
 
-
-
 //configurations
 var gateway = braintree.connect({
   environment: braintree.Environment.Sandbox,
@@ -33,6 +31,11 @@ app.get("/client_token", function (req, res) {
   });
 });
 
+//
+app.post("/checkout", function (req, res) {
+  var nonceFromTheClient = req.body.payment_method_nonce;
+  // Use payment method nonce here
+});
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
